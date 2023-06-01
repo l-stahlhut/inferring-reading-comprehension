@@ -6,7 +6,7 @@ This repo contains the code belonging to my masters thesis "Inferring text compr
 **LinguisticEyeLSTM** is a sequential neural architecture that processes the sequence of fixations during reading and infers 
 the level of text comprehension.
 
-![](reports/images/Model_architecture.png)
+![](images/Model_architecture.png)
 ## Repo Structure
 ```
 project
@@ -85,8 +85,9 @@ pip install -r requirements.txt
 ```
 Follow the instructions below to preprocess the data and perform classification. 
 
+![](images/methods_overview_quer.png)
+
 # 1. Data preprocessing
-![](reports/images/methods_overview_new/methods_overview_quer.png)
 ## Stimulus texts 
 ### Preprocessing
 1. reformat SB-SAT texts such that they have the same format as the InDiCo stimulus texts (one file per screen, one line 
