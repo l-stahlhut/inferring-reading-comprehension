@@ -1,5 +1,5 @@
 # Inferring text comprehension from eye movements in reading using deep neural sequence models
-Masters Thesis by Laura Stahlhut, University of Zurich, Institute for Computational Linguistics (2023)
+Masters Thesis by Laura Stahlhut, University of Zurich, Institute for Computational Linguistics (2023), Grade: 6
 
 This repo contains the code belonging to my masters thesis "Inferring text comprehension from eye movements in reading using deep neural sequence models".
 
@@ -136,7 +136,7 @@ python3 src/extract_label.py --SBSAT
 python3 src/extract_label.py --InDiCo
 ````
 
-# 2) Encoding the data
+# 2. Encoding the data
 Encode the data by specifying the dataset and the desired features, for example: 
 --s1_rm1_lf1
 ````angular2html
@@ -145,7 +145,7 @@ python3 src/encode_data.py --InDiCo --s1_rm1_lf0
 ````
 Please refer to the code to see which flag refers to which version of the features.
 
-# 3) Classification
+# 3. Classification
 Train the different model variations, e.g. for the SB-SAT dataset with all features:
 ````angular2html
 python3 nn/model.py --GPU 0 --s1_rm1_lf1 --SBSAT --save_dir nn/results --weights_dir  nn/weights
