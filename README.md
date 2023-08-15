@@ -72,18 +72,19 @@ git clone https://git@github.com:l-stahlhut/ET-Reading-Comprehension.git
 ```
 
 ### Download the data
-**SB-SAT dataset**: You can download the publicly available data here
+**SB-SAT**: You can download the publicly available data here
 ```
 git clone https://github.com/aeye-lab/etra-reading-comprehension
 ```
 **InDiCo**: The Individual Differences Corpus is not publicly available. It can be reproduced by exporting the fixation 
 report with the same columns that are in the SB-SAT dataset via SR Research's Dataviewer.
 
-###Install packages
+### Install packages
 ```
 pip install -r requirements.txt
 ```
-Follow the instructions below to preprocess the data and perform classification. 
+Follow the instructions below to preprocess the data and perform classification. <br>
+The following image gives an overview over the **general workflow** which includes data preprocessing (fixation data, stimulus texts and target variable), data encoding and classification.
 
 ![](images/methods_overview_quer.png)
 
