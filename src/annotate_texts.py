@@ -1568,12 +1568,22 @@ class SurprisalScorer:
 
 def main():
     if args.SBSAT is True:
+        outpath = 'data/SB-SAT/interim/stimuli/annotated_texts'
+        if not os.path.exists(outpath):
+            os.makedirs(outpath)
+            print("The new directory is created!")
         a = AnnotatedTexts()
         a.write_annotations_to_csv()
+        print("The annotated texts have been saved in ", outpath)
 
     elif args.InDiCo is True:
+        outpath = 'data/InDiCo/interim/stimuli/annotated_texts'
+        if not os.path.exists(outpath):
+            os.makedirs(outpath)
+            print("The new directory is created!")
         a = AnnotatedTexts()
         a.write_annotations_to_csv()
+        print("The annotated texts have been saved in ", outpath)
 
     else:
         print("Please specify which texts you'd like to annotate!")
