@@ -99,7 +99,7 @@ Save both in /data/SBSAT/raw/stimuli.
  for InDiCo so we first have to bring the SBSAT texts into the same format. The reformated files are saved in
  /data/SBSAT/raw/stimuli/lexical_surprisal and /data/SBSAT/raw/stimuli/sbsat_sentences_screens.
 ````angular2html
-python3 reformat_SBSAT.py --SBSAT
+python3 src/reformat_lexical_surprisal_SBSAT.py
 python3 src/reformat_SBSAT_texts.py --reformat
 ````
 ### Linguistic annotation
