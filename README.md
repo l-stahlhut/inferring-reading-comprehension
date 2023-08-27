@@ -64,20 +64,21 @@ project
 │
 └───notebooks
 ```
-## How to reproduce the experiments
+## Datasets
+
+- **SB-SAT**: Stony Brook SAT reading fixation dataset (English stimuli). This dataset is publicly available data here. The expermients can be reproduced with the SB-SAT dataset.
+```
+https://github.com/aeye-lab/etra-reading-comprehension
+```
+- **InDiCo**: Individual Differences Corpus, compiled at the University of Zurich (German stimuli). This dataset is not publicly available. I had access to the edf files and exported the fixation report with the same columns that are in the SB-SAT dataset via SR Research's Dataviewer.
+
+
+## How to reproduce the experiments with the SB-SAT dataset:
 
 ### Clone this repository
 ```
 git clone https://git@github.com:l-stahlhut/ET-Reading-Comprehension.git
 ```
-
-### Download the data
-**SB-SAT**: You can download the publicly available data here
-```
-git clone https://github.com/aeye-lab/etra-reading-comprehension
-```
-**InDiCo**: The Individual Differences Corpus is not publicly available. It can be reproduced by exporting the fixation 
-report with the same columns that are in the SB-SAT dataset via SR Research's Dataviewer.
 
 ### Install packages
 ```
@@ -91,19 +92,22 @@ The following image gives an overview over the **general workflow** which includ
 # 1. Data preprocessing
 ## Stimulus texts 
 ### Preprocessing
-1. reformat SB-SAT texts such that they have the same format as the InDiCo stimulus texts (one file per screen, one line 
-per sentence) 
-2. reformat file for lexical surprisal
+1. Download the [stimulus texts](https://github.com/aeye-lab/etra-reading-comprehension/blob/main/utils/texts_sb_sat.txt)
+and the [surprisal file](https://github.com/aeye-lab/etra-reading-comprehension/blob/main/utils/surprisal.csv).
+Save both in /data/SBSAT/raw/stimuli.
+2. reformat the file for lexical surprisal and the SB-SAT texts. Reason: The text annotation code was initially written
+ for InDiCo so we first have to bring the SBSAT texts into the same format. The reformated files are saved in
+ /data/SBSAT/raw/stimuli/lexical_surprisal and /data/SBSAT/raw/stimuli/sbsat_sentences_screens.
 ````angular2html
 python3 reformat_SBSAT.py --SBSAT
-python3 reformat_lexical_surprisal.py
+python3 src/reformat_SBSAT_texts.py --reformat
 ````
 ### Linguistic annotation
-Annotate the texts from both datasets:
+Annotate the texts from this dataset:
 ````angular2html
-python3 annotate_texts.py --InDiCo
-python3 annotate_texts.py --SBSAT
+python3 src/annotate_texts.py --SBSAT
 ````
+The annotated texts are saved in /data/SB-SAT/interim/stimuli/annotated_texts.
 
 ## Fixation Data
 The raw fixation data for SBSAT is publicly available (18sat_fixfinal.csv).
@@ -153,11 +157,6 @@ python3 nn/model.py --GPU 0 --s1_rm1_lf1 --SBSAT --save_dir nn/results --weights
 ````
 This saves the results and model weights. The flags for the data variations of the dataset can be seen in the script. 
 The evaluation of the model (Ahn (2020) baseline implemented by Reich et al.(2022)) is included in this script.
-
-
-# Datasets
-- **InDiCo**: Individual Differences Corpus, compiled at the University of Zurich (German stimuli)
-- **SB-SAT**: Stony Brook SAT reading fixation dataset (English stimuli) 
 
 ## Sources: 
 - SB-SAT data: Ahn et al. (2020): https://github.com/ahnchive/SB-SAT
