@@ -33,20 +33,20 @@ class ReformatedTexts:
     def __init__(self):
         self.raw_texts_directory: str = "data/SB-SAT/raw/stimuli/texts_sb_sat.txt"
         self.out_directory: str = "data/SB-SAT/interim/stimuli"
-        self.sentences_directory = (os.path.join(self.out_directory, 'sbsat_sentences'))
+       # self.sentences_directory = (os.path.join(self.out_directory, 'sbsat_sentences'))
         self.sentences_screens_directory = (os.path.join(self.out_directory, 'sbsat_sentences_screens'))
-        self.sentences_screens_corrected_directory = (os.path.join(self.out_directory, 'sbsat_sentences_screens_corr'))
+       # self.sentences_screens_corrected_directory = (os.path.join(self.out_directory, 'sbsat_sentences_screens_corr'))
         self.text_files = self.read_file()  # [(text_id, screen_id, sentence_id, sentence), ...]
         #self.frequencies = self.load_frequencies()
         # self.annotations = None
 
     def create_new_directories(self):
         if not os.path.exists(os.path.join(self.out_directory, 'sbsat_sentences')):
-            os.makedirs(os.path.join(self.out_directory, 'sbsat_sentences'))
+           os.makedirs(os.path.join(self.out_directory, 'sbsat_sentences'))
         if not os.path.exists(os.path.join(self.out_directory, 'sbsat_sentences_screens')):
             os.makedirs(os.path.join(self.out_directory, 'sbsat_sentences_screens'))
         if not os.path.exists(os.path.join(self.out_directory, 'sbsat_sentences_screens_corr')):
-            os.makedirs(os.path.join(self.out_directory, 'sbsat_sentences_screens_corr'))
+           os.makedirs(os.path.join(self.out_directory, 'sbsat_sentences_screens_corr'))
 
     def read_file(self):
         """Read in raw stimulus file (from David's repo: one txt file for all sentences.
@@ -128,7 +128,8 @@ class ReformatedTexts:
                 if int(sent[1]) == screen_id:
                     outfile.write(sent[3] + "\n")
 
-    def write_sentences_of_all_screens_to_file(self, text_id, screen_id):
+    # def write_sentences_of_all_screens_to_file(self, text_id, screen_id):
+    def write_sentences_of_all_screens_to_file(self):
         # dickens -> 5 screens
         for i in range(1, 6):
             self.write_sentences_of_one_screen_to_file(1, i)  # 01 = dickens
@@ -227,17 +228,18 @@ class ReformatedTexts:
 def main():
     r = ReformatedTexts()
 
-    print(r.read_file())
+    if args.reformat is True:
+        print("Starting to reformat English stimulus texts (SB-SAT)...")
+        r.create_new_directories()
+        print("Reformating files...")
+        # r.write_sentences_to_file()  # write data with one file per text, one sentence per line
+        # THIS IS WHAT WE ACTUALLY NEED FOR ANNOTATE_TEXTS.PY:
+        r.write_sentences_of_all_screens_to_file()  # write data with one file per screen, one sentence per line
+        print("Reformated data can be found in ", r.out_directory)
 
-    # if args.reformat is True:
-    #     print("Starting annotation of English stimulus texts (SB-SAT)...")
-    #     r.create_new_directories()
-    #     print("Reformating files...")
-    #     r.write_sentences_to_file()  # write data with one file per text, one sentence per line
-    #     r.write_sentences_of_all_screens_to_file()  # write data with one file per screen, one sentence per line
-    #     print("Reformated data can be found in ", r.out_directory)
-    # #elif args.tokenize is True:
-    #     #r.tokenize()
+
+    elif args.tokenize is True:
+        r.tokenize()
 
 
 
